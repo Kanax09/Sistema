@@ -1,0 +1,600 @@
+:root{
+    --color-fondo: #61272d;
+    --color-rojoactivo: #c54044;
+    --color-rojoinactivo:#341616;
+    --color-naranja:#f39765;
+    --color-amarillo:#fede66;
+    --color-blanco:#fff;
+
+    /* Sombras personalizadas para tu paleta oscura */
+    --shadow-light: #7a3239; /* Un toque más claro para la luz */
+    --shadow-dark: #4a1e22;  /* Un toque más oscuro para la sombra */
+}
+
+body {
+    background-color: var(--color-fondo);
+}
+
+.btn-glow-red {
+    background-color: var(--color-rojoactivo); /* Rojo vibrante */
+    color: white;
+    border: none;
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Sombra inicial (resplandor suave) */
+    box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3); 
+}
+
+.btn-glow-red:hover {
+    background-color: #d63031; /* Un rojo un poco más oscuro al pasar el mouse */
+    transform: translateY(-5px); /* Se desplaza hacia arriba */
+    /* Aumentamos el resplandor al hacer hover */
+    box-shadow: 0 8px 20px rgba(231, 76, 60, 0.5);
+    color: white;
+}
+
+/* Asegurar que el icono siempre se vea bien */
+.btn-glow-red i {
+    color: white;
+}
+
+
+/* --- Estilos base de la píldora (Mantenemos los anteriores) --- */
+.search-pill {
+    background-color: var(--color-rojoinactivo); /* Color base oscuro */
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    height: 45px;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Transición suave */
+    border: 2px solid transparent; /* Borde invisible inicial para evitar saltos */
+}
+
+/* --- NUEVO: Estilo cuando el input tiene el FOCO (:focus-within) --- */
+.search-pill:focus-within {
+    background-color: var(--color-fondo); /* Aclaramos un poco el fondo al enfocar */
+    
+    /* EL RESPLANDOR (Glow Effect) */
+    /* Usamos el mismo color rojizo pero con opacidad (0.5) y mucho desenfoque (20px) */
+    box-shadow: 0 0 20px rgba(125, 52, 58, 0.6); 
+    
+    /* Opcional: Un borde sutil para definir más la forma */
+    border-color: var(--color-rojoactivo);
+}
+
+/* --- Estilos del input (Mantenemos los anteriores) --- */
+.search-pill input {
+    background: transparent !important;
+    border: none !important;
+    color: white !important;
+    padding-left: 10px;
+    width: 200px;
+}
+
+/* Importante: Quitar la sombra por defecto azul de Bootstrap en el input */
+.search-pill input:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+/* Placeholder e Icono (Mantenemos los anteriores) */
+.search-pill input::placeholder {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.search-pill i {
+    color: rgba(255, 255, 255, 0.7);
+    transition: color 0.3s ease;
+}
+
+/* Opcional: El icono también brilla un poco más en focus */
+.search-pill:focus-within i {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+
+/* Estilo base para ambos contenedores */
+
+
+
+.custom-container {
+    border-radius: 20px;
+    border: none;
+    height: 100%; /* Permite que ambos tengan la misma altura si están en la misma fila */
+    min-height: 400px;
+    background-color: var(--color-fondo);
+    
+}
+
+.neumorphic {
+    /* IMPORTANTE: El color de fondo debe ser igual al color de fondo de tu página */
+    background-color: var(--color-fondo); 
+    
+    /* El redondeo es crucial para que el efecto se vea "suave" */
+    border-radius: 20px; 
+    
+    /* La sombra: 
+       10px (derecha/abajo) + 20px (difuminado) + color oscuro (#bebebe)
+       -10px (izquierda/arriba) + 20px (difuminado) + color claro (#ffffff)
+    */
+    box-shadow: 10px 10px 20px var(--shadow-dark), 
+               -10px -10px 20px var(--color-fondo);
+               
+    /* Opcional: un borde muy sutil ayuda a definir el objeto */
+}
+.barra{
+    background-color: var(--color-rojoinactivo);
+}
+/* Solo el contenedor de la izquierda tendrá scroll */
+.scroll-box {
+    max-height: 600px; /* Altura máxima del área de scroll */
+    overflow-y: auto;
+    padding: 1.5rem;
+    background-color: var(--color-fondo);
+    border: none;
+    border-radius: 20px;
+    border-top-right-radius: 0px;
+}
+
+/* Ajuste de imágenes para mantener uniformidad */
+.card-img-top {
+    height: 150px;
+    object-fit: cover;
+}
+
+.card-img-square {
+    width: 100%;           /* Ocupa todo el ancho disponible */
+    aspect-ratio: 1 / 1;   /* FUERZA el formato cuadrado */
+    object-fit: cover;     /* La clave: hace zoom y recorta para que no se deforme */
+    object-position: center; /* Centra el enfoque de la imagen */
+}
+
+
+
+/* Personalización del scrollbar */
+.scroll-box::-webkit-scrollbar {
+    width: 6px;
+}
+.scroll-box::-webkit-scrollbar-thumb {
+    background: var(--color-rojoinactivo);
+    border-radius: 10px;
+}
+
+
+/* Estilo del contenedor del carrito */
+.circle-cart {
+    width: 60px;
+    height: 60px;
+    background-color: var(--color-rojoactivo); /* Color de tu marca */
+    color: white;
+    border-radius: 50%; /* Esto hace el círculo */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Ajuste opcional para el botón de flecha si quieres que sea consistente */
+.btn-outline-secondary {
+    border-color: #dee2e6;
+}
+
+
+/* Quitar el outline azul por defecto de Bootstrap y poner algo más suave */
+.form-control:focus {
+    box-shadow: none;
+    border-color: #ced4da;
+}
+
+/* Estilo para el grupo de búsqueda */
+.input-group {
+    transition: all 0.3s ease;
+}
+
+/* Efecto de elevación al enfocar la barra de búsqueda */
+.input-group:focus-within {
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+/* Ajuste del icono dentro del input */
+.input-group-text {
+    background-color: white;
+    cursor: pointer;
+}
+
+/* Redondeo de las esquinas de la tarjeta */
+.rounded-4 {
+    border-radius: 1rem !important;
+}
+
+/* Mejora el diseño de los botones de cantidad */
+.btn-light {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Hover suave para los botones */
+.btn-light:hover {
+    background-color: #e2e6ea;
+}
+
+/* Un toque de color al precio (puedes cambiarlo a tu color de marca) */
+.text-primary {
+    color: #0d6efd !important;
+}
+
+/* 1. Definimos la altura fija del CONTENEDOR de la imagen */
+.contenedor-img-fijo {
+    height: 200px; /* AJUSTA ESTA ALTURA A TU GUSTO (ej: 180px, 250px) */
+    overflow: hidden; /* Corta cualquier cosa que se salga del contenedor */
+    display: flex; /* Centrado interno opcional */
+    align-items: center; 
+    justify-content: center;
+}
+
+/* 2. Hacemos que la IMAGEN llene el contenedor con zoom inteligente */
+.img-ajuste-zoom {
+    width: 100%;
+    height: 100%; /* Ocupa el 100% de la altura fija del padre */
+    object-fit: cover; /* MÁGICO: Hace zoom y recorta para llenar sin deformar */
+    object-position: center; /* Centra el recorte en el producto */
+}
+
+/* Tarjeta Elevada (Hacia afuera) */
+.neumo-card {
+    background-color: var(--color-fondo);
+    border-radius: 20px;
+    box-shadow: 10px 10px 20px var(--shadow-dark), 
+                -10px -10px 20px var(--shadow-light);
+    color: var(--color-blanco);
+    border: none;
+}
+
+/* Contenedor Hundido (Hacia adentro) */
+.neumo-inset {
+    background-color: var(--color-fondo);
+    border-radius: 15px;
+    box-shadow: inset 5px 5px 10px var(--shadow-dark), 
+                inset -5px -5px 10px var(--shadow-light);
+}
+
+/* Botones estilo neumórfico */
+.btn-neumo {
+    background-color: var(--color-rojoactivo);
+    color: var(--color-blanco);
+    border: none;
+    box-shadow: 3px 3px 6px var(--shadow-dark), 
+                -3px -3px 6px var(--shadow-light);
+    transition: all 0.2s ease;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn-neumo:hover{
+    color: var(--color-blanco);
+}
+
+.btn-neumo:active {
+    box-shadow: inset 2px 2px 4px var(--shadow-dark);
+}
+
+/* Ajustes para la lista de productos dentro de la tarjeta */
+.list-group-item {
+    background-color: transparent !important;
+    border: none !important;
+    color: var(--color-blanco) !important;
+}
+
+/* Línea divisoria personalizada */
+hr {
+    border-top: 1px solid var(--shadow-dark) !important;
+    opacity: 0.5;
+}
+
+/* Estilo para que el estado "En línea" resalte */
+.status-indicator {
+    color: var(--color-naranja) !important;
+}
+
+/* Clase base para botones pequeños o normales */
+.btn-neumo {
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: none;
+    background-color: var(--color-rojoactivo);
+    color: var(--color-blanco);
+    box-shadow: 3px 3px 6px var(--shadow-dark), 
+                -3px -3px 6px var(--shadow-light);
+    transition: all 0.2s ease;
+}
+
+/* Nueva clase para botones grandes de acción total */
+.btn-neumo-full {
+    width: 100%;           /* Ocupa todo el contenedor */
+    padding: 4px 5px;    /* Más grande y cómodo */
+    font-size: 1.1rem;     /* Un poco más legible */
+    font-weight: 600;
+    border-radius: 15px;   /* Un poco más redondeado para mayor impacto */
+    border: none;
+    background-color: var(--color-rojoactivo);
+    color: var(--color-blanco);
+    box-shadow: 3px 3px 6px var(--shadow-dark), 
+                -3px -3px 6px var(--shadow-light);
+    transition: all 0.2s ease;
+}
+
+/* Efecto hover/active compartido */
+.btn-neumo:active, .btn-neumo-full:active {
+    box-shadow: inset 2px 2px 4px var(--shadow-dark);
+}
+
+
+.btn-neumo-full3 {
+    /* Estructura base (layout) */
+    width: 100%;
+    padding: 4px 5px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border-radius: 15px;
+    border: none;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    cursor: pointer;
+
+    /* Colores específicos solicitados */
+    background-color: var(--color-amarillo);
+    color: var(--color-fondo);
+
+    /* Sombra neumórfica base */
+    box-shadow: 4px 4px 8px var(--shadow-dark), 
+                -4px -4px 8px var(--shadow-light);
+}
+
+
+/* --- Botón Maestro de Pago (Animado y con Resplandor) --- */
+.btn-neumo-full2 {
+    width: 100%;           /* Ocupa todo el ancho */
+    padding: 10px 12px;    /* Un poco más grande para mayor impacto */
+    font-size: 1.15rem;    /* Texto muy legible */
+    font-weight: 700;      /* Texto en negrita */
+    border-radius: 15px;
+    border: none;
+    
+    /* Usamos tu color de marca activo */
+    background-color: var(--color-rojoactivo);
+    color: var(--color-blanco);
+    
+    /* Sombra Neumórfica Base (Elevación inicial sutil) */
+    box-shadow: 4px 4px 8px var(--shadow-dark), 
+               -4px -4px 8px var(--shadow-light);
+    
+    /* DEFINIMOS LA TRANSICIÓN: cubic-bezier para un movimiento orgánico */
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    
+    cursor: pointer;
+}
+
+/* --- EFECTO HOVER (Levitación y Resplandor) --- */
+.btn-neumo-full2:hover {
+    /* 1. MOVIMIENTO: Levitación hacia arriba (5px) */
+    transform: translateY(-5px);
+    
+    /* 2. RESPLANDOR (Glow): Aumentamos el desenfoque y usamos el color de marca */
+    /* Mantenemos la sombra oscura base pero añadimos un resplandor rojizo difuso */
+    box-shadow: 0 10px 25px rgba(197, 64, 68, 0.6), /* Resplandor de marca */
+                4px 4px 8px var(--shadow-dark);      /* Sombra base */
+    
+    /* Opcional: Aclaramos un poco el color de fondo para simular más luz */
+    background-color: #d64a4e; 
+    color: white;
+}
+
+/* --- EFECTO ACTIVE (Presionado) --- */
+.btn-neumo-full2:active {
+    /* Volvemos a la posición original y aplicamos sombra interna */
+    transform: translateY(0);
+    box-shadow: inset 3px 3px 6px var(--shadow-dark);
+}
+
+
+/* Capa de fondo oscurecida y desenfocada */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Baja exposición */
+    backdrop-filter: blur(8px);      /* Desenfoque */
+    display: none;                   /* Oculto por defecto */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 20px;
+    transition: background 10s ease;
+}
+
+.modal-overlay.active {
+    display: flex; /* Se muestra al activar la clase */
+}
+
+/* El Modal en sí (reutilizamos la lógica del neumo-card) */
+.modal-box {
+    background-color: var(--color-fondo);
+    padding: 2rem;
+    border-radius: 25px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 20px 20px 60px var(--shadow-dark), 
+                -20px -20px 60px var(--shadow-light);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+}
+
+/* El círculo para el check */
+.circle-check {
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-fondo);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    color: #4cd964; /* Verde brillante */
+    margin-bottom: 20px;
+    box-shadow: inset 6px 6px 12px var(--shadow-dark), 
+                inset -6px -6px 12px var(--shadow-light);
+}
+
+/* 1. Definimos la animación (de pequeño a tamaño normal) */
+@keyframes modalPopIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.9); /* Empieza un 10% más pequeño */
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);   /* Tamaño real */
+    }
+}
+
+/* 2. Aplicamos la animación a tu caja del modal */
+.modal-box {
+    /* ... mantén tus estilos anteriores ... */
+    
+    /* Animación: 0.4 segundos, curva 'back-out' para un rebote sutil */
+    animation: modalPopIn .9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* Círculo para la X de error */
+.circle-error {
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-fondo);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    color: var(--color-rojoactivo); /* Color de alerta */
+    margin-bottom: 20px;
+    /* Mantenemos el mismo estilo de "hundido" */
+    box-shadow: inset 6px 6px 12px var(--shadow-dark), 
+                inset -6px -6px 12px var(--shadow-light);
+}
+
+/* Botón Neumórfico Amarillo */
+.btn-neumo-warning {
+    background-color: var(--color-amarillo); /* Amarillo */
+    color: var(--color-fondo); /* Rojo oscuro para el icono */
+    border: none;
+    box-shadow: 3px 3px 6px var(--shadow-dark), 
+                -3px -3px 6px var(--shadow-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-neumo-warning:hover {
+    background-color: var(--color-fondo);
+    transform: scale(1.05);
+}
+
+/* Badge Sutil para "existencias" */
+.badge-neumo {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.product-id-banner {
+    background: rgba(255, 255, 255, 0.03); /* Muy sutil */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05); /* Línea divisoria suave */
+    border-radius: 10px 10px 0 0; /* Bordes redondeados solo arriba */
+    padding: 8px;
+    margin-bottom: 1rem;
+    text-align: center;
+    
+    /* Tipografía técnica */
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4); /* Color tenue */
+}
+
+/* Botón Cancelar (Neutro, para evitar el fondo blanco/texto rojo) */
+.btn-neumo-cancel {
+    background: var(--color-fondo) !important; /* Fuerza el fondo oscuro */
+    color: var(--color-blanco) !important;      /* Texto blanco */
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 4px 4px 8px var(--shadow-dark), inset -2px -2px 4px rgba(255,255,255,0.05);
+    transition: 0.3s;
+}
+
+.btn-neumo-cancel:hover {
+    box-shadow: inset 2px 2px 5px rgba(0,0,0,0.3);
+}
+
+/* Botón Confirmar (Rojo Peligro) */
+.btn-neumo-danger {
+    background: var(--color-fondo) !important;
+    color: #ff5f5f !important; /* Rojo */
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    box-shadow: 4px 4px 8px var(--shadow-dark), inset -2px -2px 4px rgba(255,255,255,0.05);
+    transition: 0.3s;
+}
+
+.btn-neumo-danger:hover {
+    background: #ff5f5f !important;
+    color: white !important;
+}
+
+.circle-trash {
+    width: 60px;
+    height: 60px;
+    background: var(--color-fondo);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.5rem;
+    color: #ff5f5f; /* Rojo peligro */
+    box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+}
+
+.circle-question {
+    width: 60px;
+    height: 60px;
+    background: var(--color-fondo);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 1.5rem;
+    color: var(--color-naranja);
+    box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+}

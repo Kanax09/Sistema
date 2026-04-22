@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="es">
+<head>
+    <!-- ... otras etiquetas meta ... -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- CONEXIÓN A STATIC -->
+    <!-- 1. Estilos generales y variables de color -->
+    <link rel="stylesheet" href="{% static 'estilo.css' %}">
+    <!-- 2. Estilos específicos para formularios neumórficos -->
+    <link rel="stylesheet" href="{% static 'estilo-forms.css' %}">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+
+    <div class="page-center-wrapper">
+        <div class="neumo-container">
+            
+            <div class="text-center mb-4">
+                <div class="circle-icon" style="background-color: var(--color-rojoactivo);">
+                    <i class="bi bi-person-fill"></i>
+                </div>
+                <h3 class="text-white mb-0">Inicio de sesión</h3>
+                <p class="text-white-50 small">Administrador</p>
+            </div>
+            {% if error %}
+            <div class="alert alert-neumo alert-dismissible fade show" role="alert">
+                <div>
+                    <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                    <strong>Error:</strong> {{ error }}
+                </div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            {% endif %}
+            <form method="POST">
+                {% csrf_token %}
+    
+                <div class="form-floating mb-4">
+                    <input type="text" name="cedula" class="form-control" id="floatingCedula" placeholder="Cédula" required>
+                    <label for="floatingCedula">
+                        <div class="label-content"> 
+                            <i class="bi bi-person-badge me-2"></i>
+                            <span>Cédula</span>
+                            
+                        </div>
+                    </label>
+                </div>
+            
+                <div class="form-floating password-wrapper mb-4">
+                    <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Contraseña" required>
+                    <label for="floatingPassword">
+                        <div class="label-content"> 
+                            <i class="bi bi-lock me-2"></i>
+                            <span>Contraseña</span>
+                            
+                        </div>
+                    </label>
+                    
+                    <button type="button" class="toggle-password" onclick="togglePasswordVisibility()">
+                        <i class="bi bi-eye" id="eyeIcon"></i>
+                    </button>
+                </div>
+            
+                <div class="d-grid mt-4">
+                    <button type="submit" class="btn btn-neumo-full2">Ingresar</button>
+                </div>
+            </form>
+            <div class="mt-4 text-center">
+                <p class="text-white-50 small mb-0">
+                    ¿No tienes una cuenta? 
+                    <a href="#" class="link-register ms-1">Regístrate aquí</a>
+                </p>
+            </div>
+    
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("floatingPassword");
+        const eyeIcon = document.getElementById("eyeIcon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("bi-eye");
+            eyeIcon.classList.add("bi-eye-slash"); // Cambia a ojo cerrado
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("bi-eye-slash");
+            eyeIcon.classList.add("bi-eye"); // Cambia a ojo abierto
+        }
+    }
+</script>
+</body>
+</html>

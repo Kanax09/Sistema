@@ -1,0 +1,129 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle Venta</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container my-3">
+        <div class="row align-items-center">
+            <div class="col-12 col-md-2">
+                <a href="{% url 'panel_ventas' %}" class="btn btn-glow-red rounded-circle p-2 d-flex align-items-center justify-content-center" 
+                   style="width: 45px; height: 45px;">
+                    <i class="bi bi-arrow-left fs-4"></i>
+                </a>
+            </div>
+            <div class="col-12 col-md-8 d-flex justify-content-center align-items-center">
+                <div class="circle-cart me-3">
+                    <i class="bi bi-cart-fill"></i>
+                </div>
+                <h2 class="mb-0 fw-bold text-white">Pedido #{{ pedido.ID_REQUEST }}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container my-5">
+        <div class="row g-4"> 
+            <div class="col-12 col-md-8">
+                <div class="card custom-container barra neumorphic">
+                    <div class="card-header text-white shadow">
+                        <h5 class="mb-0">PRODUCTOS COMPRADOS</h5>
+                    </div>
+                    <div class="card-body scroll-box">
+                        <div class="row mb-3">
+                            <div class="col-12 d-flex justify-content-end mb-1">
+                                <div class="search-pill">
+                                    <i class="bi bi-search"></i>
+                                    <input type="text" id="buscadorDetalle" placeholder="Buscar producto...">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row g-3" id="contenedorDetalles">
+                            {% for item in detalles %}
+                            <div class="col-12 col-sm-6 col-lg-4 mb-4 item-detalle" data-nombre="{{ item.producto.PRODUCT_NAME|lower }}">
+                                <div class="neumo-card h-100 p-3">
+                                    <div class="neumo-inset p-2 mb-3">
+                                        <img src="https://tse2.mm.bing.net/th/id/OIP.s_GtX67EixrNNR0rrwt21QHaEP?rs=1&pid=ImgDetMain&o=7&rm=3" 
+                                             class="card-img-top rounded-3 img-ajuste-zoom" 
+                                             alt="{{ item.producto.PRODUCT_NAME }}">
+                                    </div>
+                                    <div class="product-id-banner" style="color: var(--color-naranja);">
+                                        ID: {{ item.producto.ID_PRODUCT }}
+                                    </div>
+                                    <div class="card-body pt-0">
+                                        <h6 class="fw-bold mb-1 text-white">{{ item.producto.PRODUCT_NAME }}</h6>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <span class="text-white-50 small me-2">{{ item.producto.SIZE }}</span>
+                                            <span class="badge border-0" style="background-color: var(--color-rojoinactivo);">
+                                                {% if item.producto.TYPE %}Gr{% else %}Ml{% endif %}
+                                            </span>
+                                        </div>
+                                        <div class="d-flex justify-content-between align-items-center mb-3">
+                                            <div class="fw-semibold fs-5" style="color: var(--color-naranja);">${{ item.subtotal }}</div>
+                                        </div>
+                                        <div class="d-flex align-items-center mb-3">
+                                            <span class="text-white-50 small me-2">Cantidad</span>
+                                            <span class="badge border-0" style="background-color: var(--color-rojoinactivo);">X {{ item.cantidad }}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            {% empty %}
+                            <p class="text-white">No hay productos en este pedido.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-12 col-md-4">
+                <div class="neumo-card p-4">
+                    <div class="mb-4">
+                        <h5 class="mb-0 text-white fw-bold">DETALLES DE COMPRA</h5>
+                    </div>
+                    <div class="neumo-inset p-3">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h6 class="text-white-50 small mb-0">Cantidad Total</h6>
+                                <p class="status-indicator fw-bold mb-0">● {{ total_unidades }} unidades</p>
+                                <p class="text-white-50 small mt-1">{{ cantidad_productos }} producto(s) distinto(s)</p>
+                            </div>
+                        </div>
+                        <hr class="my-3">
+                        <h6 class="text-white-50 small">Cliente</h6>
+                        <p class="small text-white">{{ cliente.NAME }} {{ cliente.SURNAME }}</p>
+                        <p class="small text-white-50">C.I.: {{ cliente.CI }}</p>
+                        <p class="small text-white-50">{{ cliente.DIRECTION }}</p>
+                    </div>
+                    <ul class="list-group list-group-flush mt-3">
+                        <li class="list-group-item d-flex justify-content-between px-0">
+                            <span class="text-white">Monto Total:</span> 
+                            <strong style="color: var(--color-naranja);">${{ total_general }}</strong>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between px-0">
+                            <span class="text-white">Fecha:</span> 
+                            <span class="text-white-50">{{ pedido.DATE|date:"d/m/Y" }} {{ pedido.TIME|time:"H:i" }}</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.getElementById('buscadorDetalle').addEventListener('input', function() {
+            const filtro = this.value.toLowerCase();
+            document.querySelectorAll('.item-detalle').forEach(item => {
+                const nombre = item.dataset.nombre;
+                item.style.display = nombre.includes(filtro) ? '' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>

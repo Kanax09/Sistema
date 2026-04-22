@@ -1,0 +1,213 @@
+/* 1. Wrapper que centra todo en la pantalla */
+.page-center-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Ocupa toda la altura visible */
+    width: 100%;
+    padding: 20px;     /* Espaciado para móviles */
+    background-color: var(--color-fondo); /* Asegura que el fondo sea uniforme */
+}
+
+/* 2. Contenedor Neumórfico Responsivo */
+.neumo-container {
+    width: 100%;
+    max-width: 600px;  /* Ajusta este valor según el ancho deseado */
+    padding: 2rem;
+    border-radius: 30px;
+    background-color: var(--color-fondo);
+    
+    /* Sombra elevada estándar para contenedores principales */
+    box-shadow: 20px 20px 60px var(--shadow-dark), 
+                -20px -20px 60px var(--shadow-light);
+    
+    /* Importante: NO definimos altura fija para que crezca dinámicamente */
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; /* Espacio automático entre elementos hijos */
+}
+
+/* Estilo para los Labels */
+.label-neumo {
+    color: var(--color-blanco);
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+/* Estilo para los Inputs (Efecto Hendido) */
+.input-neumo {
+    width: 100%;
+    padding: 12px 20px;
+    background-color: var(--color-fondo);
+    border: none;
+    border-radius: 12px;
+    color: var(--color-blanco);
+    /* Sombra interna para crear la profundidad de "hendidura" */
+    box-shadow: inset 6px 6px 10px var(--shadow-dark), 
+                inset -6px -6px 10px var(--shadow-light);
+    transition: all 0.3s ease;
+    outline: none;
+}
+
+/* Efecto de foco para el input (ligeramente más claro) */
+.input-neumo:focus {
+    box-shadow: inset 8px 8px 15px var(--shadow-dark), 
+                inset -8px -8px 15px var(--shadow-light);
+}
+
+/* Círculo para el icono de login */
+.circle-icon {
+    width: 80px;
+    height: 80px;
+    background-color: var(--color-fondo);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    color: var(--color-blanco);
+    margin: 0 auto 20px;
+    /* Sombra elevada para resaltar el icono */
+    box-shadow: 6px 6px 12px var(--shadow-dark), 
+                -6px -6px 12px var(--shadow-light);
+}
+
+/* Adaptamos el contenedor flotante para que no tenga bordes ni fondos blancos */
+.form-floating > .form-control {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: inset 6px 6px 10px var(--shadow-dark), 
+                inset -6px -6px 10px var(--shadow-light) !important;
+    color: var(--color-blanco) !important;
+    border-radius: 12px;
+}
+
+/* El label flotante necesita color blanco y ajuste de ancho */
+.form-floating > label {
+    color: rgba(255, 255, 255, 0.6);
+    padding: 1rem 1.5rem; /* Ajuste para que se vea bien con el neumo */
+}
+
+/* Cuando el label flota (animación) o cuando el input tiene foco */
+.form-floating > .form-control:focus ~ label,
+.form-floating > .form-control:not(:placeholder-shown) ~ label {
+    color: var(--color-blanco) !important;
+    transform: scale(0.85) translateY(-0.5rem) translateX(0.15rem);
+}
+
+/* Asegurar que el icono dentro del label se alinee bien */
+.label-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Esto elimina el fondo blanco/gris que Bootstrap pone detrás del label flotante */
+.form-floating > .form-control:focus ~ label::after,
+.form-floating > .form-control:not(:placeholder-shown) ~ label::after {
+    background-color: transparent !important;
+}
+
+/* Aseguramos que el label en sí mismo tampoco tenga fondo */
+.form-floating > label {
+    background-color: transparent !important;
+}
+
+/* Contenedor relativo para el input y el botón */
+.password-wrapper {
+    position: relative;
+}
+
+/* Estilo del botón del ojo */
+.toggle-password {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: white; /* Color blanco solicitado */
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 10; /* Asegura que esté encima del input */
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ajuste del input para que el texto no choque con el icono */
+.form-floating .form-control {
+    padding-right: 45px; /* Espacio para que el texto no toque el ojo */
+}
+
+/* Ocultar el icono de "ojo" nativo en Edge, IE y otros navegadores */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none !important;
+}
+
+/* Ocultar el icono en navegadores basados en Webkit (Chrome, Safari, etc.) */
+input[type="password"]::-webkit-credentials-auto-fill-button {
+    visibility: hidden;
+    display: none !important;
+}
+
+/* Estilo base para el Alert */
+.alert-neumo {
+    background-color: var(--color-fondo);
+    color: #ff8e8e; /* Un rojo claro para que resalte sobre el fondo oscuro */
+    border: none;
+    border-radius: 12px;
+    /* Borde izquierdo como indicador visual de error */
+    border-left: 5px solid var(--color-rojoactivo);
+    /* Sombra tenue para que se sienta parte de la "interfaz" */
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4), 
+                inset 2px 2px 5px rgba(255, 255, 255, 0.05);
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+/* El botón de cierre (X) */
+.alert-neumo .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%); /* Lo vuelve blanco */
+    opacity: 0.7;
+    transition: opacity 0.2s;
+}
+
+.alert-neumo .btn-close:hover {
+    opacity: 1;
+}
+
+.link-register {
+    color: var(--color-rojoactivo); /* Tu color principal */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.link-register:hover {
+    color: #ff6b6b; /* Un tono un poco más claro al pasar el mouse */
+    text-decoration: underline;
+}
+
+/* Ajuste para que el icono esté a la izquierda del texto */
+.label-content {
+    display: flex;
+    justify-content: flex-start; /* Alineado a la izquierda */
+    align-items: center;
+    gap: 8px; /* Espacio entre icono y texto */
+    width: 100%;
+}
+
+/* Estilo para el input de fecha (Date Picker) */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Hace que el icono del calendario sea blanco */
+    cursor: pointer;
+}
+
+

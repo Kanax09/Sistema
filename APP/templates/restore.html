@@ -1,0 +1,37 @@
+<div class="backup-container">
+    <h2>Gestión de Base de Datos</h2>
+    
+    <form id="restore-form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <input type="file" name="backup_file" id="file-input" style="display: none;" accept=".sqlite3">
+        
+        <button type="button" class="btn btn-primary" id="custom-button">
+            📂 Seleccionar Backup y Restaurar
+        </button>
+    </form>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert"> {{ message }} </div>
+        {% endfor %}
+    {% endif %}
+</div>
+
+<script>
+    // Al hacer clic en el botón visible, activamos el input oculto
+    document.getElementById('custom-button').addEventListener('click', function() {
+        document.getElementById('file-input').click();
+    });
+
+    // En cuanto el usuario selecciona el archivo, el formulario se envía solo
+    document.getElementById('file-input').onchange = function() {
+        if (this.value) {
+            if (confirm("¿Confirmas la restauración? Los datos actuales se perderán.")) {
+                document.getElementById('restore-form').submit();
+            } else {
+                this.value = ""; // Limpiar selección si cancela
+            }
+        }
+    };
+</script>

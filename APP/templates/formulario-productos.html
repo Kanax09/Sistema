@@ -1,0 +1,124 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Usuarios</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+    <link rel="stylesheet" href="{% static 'css/estilo-forms.css' %}">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+</head>
+</head>
+<body>
+    <div class="page-center-wrapper">
+        <div class="neumo-container">
+            <!-- Botón volver -->
+            <div class="row">
+                <div class="col-12 col-md-2">
+                    <a href="{% url 'admin_catalogo' %}" class="btn btn-glow-red rounded-circle p-2 d-flex align-items-center justify-content-center" 
+                       style="width: 45px; height: 45px;">
+                        <i class="bi bi-arrow-left fs-4"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="text-center mb-4">
+                <div class="circle-icon">
+                    <i class="bi bi-box-seam"></i>
+                </div>
+                <h3 class="text-white mb-0">
+                    {% if producto %}Editar Producto{% else %}Ingresar Producto{% endif %}
+                </h3>
+                <p class="text-white-50 small">Gestión de inventario</p>
+            </div>
+    
+        <form method="POST">
+                {% csrf_token %}
+                <!-- Los campos deben tener name="..." -->
+                <div class="mb-3">
+                    <label for="prodFoto" class="custom-file-upload">
+                        <i class="bi bi-cloud-upload"></i> Subir Foto del Producto
+                    </label>
+                    <input type="file" id="prodFoto" class="input-file-hidden">
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="prodNombre" name="nombre" placeholder="Nombre"
+                           value="{{ producto.PRODUCT_NAME|default:'' }}" required>
+                    <label for="prodNombre">
+                        <div class="label-content">
+                            <i class="bi bi-tag"></i> <span>Nombre del producto</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-8">
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="prodPeso" name="size" placeholder="Peso"
+                                   value="{{ producto.SIZE|default:'' }}" required>
+                            <label for="prodPeso">Peso</label>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-4">
+                        <div class="form-floating mb-3">
+                            <select class="form-select select-neumo" id="prodTipo" name="tipo">
+                                <option value="1" {% if producto.TYPE %}selected{% endif %}>Gr</option>
+                                <option value="0" {% if not producto.TYPE %}selected{% endif %}>Ml</option>
+                            </select>
+                            <label for="prodTipo">Tipo</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="number" step="0.01" class="form-control" id="prodPrecio" name="precio" placeholder="Precio"
+                           value="{{ producto.PRICE|default:'' }}" required>
+                    <label for="prodPrecio">
+                        <div class="label-content">
+                            <i class="bi bi-currency-dollar"></i> <span>Precio</span>
+                        </div>
+                    </label>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input type="number" class="form-control" id="prodStock" name="stock" placeholder="Stock"
+                           value="{{ producto.STOCK|default:'' }}" required>
+                    <label for="prodStock">
+                        <div class="label-content">
+                            <i class="bi bi-stack"></i> <span>Stock</span>
+                        </div>
+                    </label>
+                </div>
+    
+            <div class="d-grid">
+                <button type="submit" class="btn btn-neumo-full2">
+                    {% if producto %}Actualizar Producto{% else %}Guardar Producto{% endif %}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    function togglePasswordVisibility() {
+        const passwordInput = document.getElementById("floatingPassword");
+        const eyeIcon = document.getElementById("eyeIcon");
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            eyeIcon.classList.remove("bi-eye");
+            eyeIcon.classList.add("bi-eye-slash"); // Cambia a ojo cerrado
+        } else {
+            passwordInput.type = "password";
+            eyeIcon.classList.remove("bi-eye-slash");
+            eyeIcon.classList.add("bi-eye"); // Cambia a ojo abierto
+        }
+    }
+</script>
+</body>
+</html>
